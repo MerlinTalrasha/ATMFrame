@@ -56,10 +56,8 @@ public class Login extends JFrame {
 		contentPane.add(comboBox);
 		//comboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"请选择"}));
 		try {
-			JDBC b1 = new JDBC(); //生成数据库操作类的对象
+			JDBC b1 = new JDBC();
 			Vector user = b1.selectSomeValue("select * from atm");
-			//user这个行向量中已经有了一条用户名为"用户输入的"的纪录
-			//把行向量中的密码取出来,0代表第一个字段
 			for (int i = 0; i < user.size(); i++) {
 				String username = user.get(i).toString();
 				comboBox.insertItemAt(username, i);
