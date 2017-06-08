@@ -1,16 +1,17 @@
 package cn.njxzc.homework;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Transferaccounts extends JDialog {
-
-	private final JPanel contentPanel = new JPanel();
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -29,27 +30,45 @@ public class Transferaccounts extends JDialog {
 	 * Create the dialog.
 	 */
 	public Transferaccounts() {
-		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+		setTitle("转账");
+		setBounds(100, 100, 278, 318);
+		getContentPane().setLayout(null);
+		
+		JLabel label = new JLabel("请输入收款人账户");
+		label.setBounds(10, 88, 114, 15);
+		getContentPane().add(label);
+		
+		textField = new JTextField();
+		textField.setBounds(134, 85, 119, 21);
+		getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel label_1 = new JLabel("请输入转账金额");
+		label_1.setBounds(10, 123, 114, 15);
+		getContentPane().add(label_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(134, 120, 119, 21);
+		getContentPane().add(textField_1);
+		
+		JButton button = new JButton("确认");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
 			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+		});
+		button.setBounds(31, 189, 93, 23);
+		getContentPane().add(button);
+		
+		JButton button_1 = new JButton("取消");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 			}
-		}
+		});
+		button_1.setBounds(146, 189, 93, 23);
+		getContentPane().add(button_1);
 	}
 
 }

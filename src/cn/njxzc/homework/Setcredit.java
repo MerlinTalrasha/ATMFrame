@@ -7,10 +7,11 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class Setcredit extends JDialog {
-
-	private final JPanel contentPanel = new JPanel();
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -29,27 +30,22 @@ public class Setcredit extends JDialog {
 	 * Create the dialog.
 	 */
 	public Setcredit() {
-		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
+		setTitle("设置信用额度");
+		setBounds(100, 100,  296, 303);
+		getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("请输入要更改的信用额度");
+		lblNewLabel.setBounds(68, 55, 168, 15);
+		getContentPane().add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(79, 109, 110, 21);
+		getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JButton button = new JButton("确认");
+		button.setBounds(86, 169, 93, 23);
+		getContentPane().add(button);
 	}
 
 }
