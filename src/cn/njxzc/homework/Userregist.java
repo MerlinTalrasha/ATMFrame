@@ -4,11 +4,19 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.sun.javafx.scene.layout.region.Margins.Converter;
+
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
@@ -53,18 +61,39 @@ public class Userregist extends JDialog {
 		depositButton.setBounds(154, 212, 72, 23);
 		getContentPane().add(depositButton);
 		
-		JRadioButton creditButton_1 = new JRadioButton("信用卡");
-		creditButton_1.setBounds(230, 212, 80, 23);
-		getContentPane().add(creditButton_1);
+		JRadioButton creditButton = new JRadioButton("信用卡");
+		creditButton.setBounds(230, 212, 80, 23);
+		getContentPane().add(creditButton);
 		
 		ButtonGroup bg=new ButtonGroup();
 		bg.add(depositButton);
-		bg.add(creditButton_1);
+		bg.add(creditButton);
 		
 		JButton button = new JButton("注册");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String username=usernameField.getText().toString();
+				String password=String.valueOf(passwordField.getPassword());
+				String repassword=String.valueOf(repasswordField.getPassword());
+				int personId=Integer.valueOf(personIdField.getText());
+				String email=emailField.getText().toString();
+				int accountType = 0;
+				if(depositButton.isSelected()){
+					accountType = 0;
+				}else if(creditButton.isSelected()){
+					accountType = 1;
+				}
 				
+				if(username.equals("")){
+					JOptionPane.showMessageDialog(null, "请输入用户名！", "友情提醒",JOptionPane.INFORMATION_MESSAGE);
+				}
+				JDBC b1 = new JDBC();
+				boolean a = b1.Change("insert into atm (username,password,personid,email,ceiling,balance,accounttype) values ('"+username+"','"+password+"','"+personId+"','"+email+"','0','0','"+accountType+"')");
+				if(a = true){
+					System.out.println("success");
+				}else{
+					System.out.println("fail");
+				}
 			}
 		});
 		button.setBounds(63, 262, 93, 23);
