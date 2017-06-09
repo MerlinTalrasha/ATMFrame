@@ -5,31 +5,18 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.util.Random;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 
 public class Transferaccounts extends JDialog {
 	private JTextField textField;
 	private JTextField textField_1;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			Transferaccounts dialog = new Transferaccounts();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
-	public Transferaccounts() {
+	public Transferaccounts(Vector user) {
 		setTitle("转账");
 		setBounds(100, 100, 278, 318);
 		getContentPane().setLayout(null);
@@ -52,10 +39,23 @@ public class Transferaccounts extends JDialog {
 		textField_1.setBounds(134, 120, 119, 21);
 		getContentPane().add(textField_1);
 		
+		String name = user.get(1).toString();
+		JDBC b1 = new JDBC();
+		
 		JButton button = new JButton("确认");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				String rd = String.valueOf((int)((1000+Math.random()*9000)/1));
+				Vector transfer = b1.selectOnlyNote("select * from atm where username='"+ name + "'");
+				int money = Integer.parseInt(transfer.get(6).toString());
+				if(textField.getText().trim().equals("") || textField_1.getText().trim().equals("")){
+					JOptionPane.showMessageDialog(null, "请填写详细信息！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
+				}else{
+					String a = JOptionPane.showInputDialog(null,rd,"验证码",JOptionPane.OK_CANCEL_OPTION);
+					if(a == rd){
+						System.out.println("success");
+					}
+				} 
 			}
 		});
 		button.setBounds(31, 189, 93, 23);
@@ -64,7 +64,7 @@ public class Transferaccounts extends JDialog {
 		JButton button_1 = new JButton("取消");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
 			}
 		});
 		button_1.setBounds(146, 189, 93, 23);

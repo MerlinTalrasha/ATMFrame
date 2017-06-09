@@ -139,6 +139,7 @@ public class Login extends JFrame {
 						if (password.equals(password1)) {
 							Adminform frame = new Adminform();
 							frame.setVisible(true);
+							frame.setResizable(false);
 							setVisible(false);
 						} else {
 							JOptionPane.showMessageDialog(null, "用户名密码错误", "友情提醒",JOptionPane.INFORMATION_MESSAGE);

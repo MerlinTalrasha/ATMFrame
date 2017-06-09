@@ -47,7 +47,7 @@ public class Userform extends JFrame {
 		mnNewMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Accountinfo af=new Accountinfo();
+				Accountinfo af=new Accountinfo(user);
 				af.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				af.setModalityType(ModalityType.APPLICATION_MODAL);
 				af.setVisible(true);
@@ -59,7 +59,7 @@ public class Userform extends JFrame {
 		menu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Deposit dp=new Deposit();
+				Deposit dp=new Deposit(user);
 				dp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dp.setModalityType(ModalityType.APPLICATION_MODAL);
 				dp.setVisible(true);
@@ -71,7 +71,7 @@ public class Userform extends JFrame {
 		menu_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Withdraw wd=new Withdraw();
+				Withdraw wd=new Withdraw(user);
 				wd.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				wd.setModalityType(ModalityType.APPLICATION_MODAL);
 				wd.setVisible(true);
@@ -83,7 +83,7 @@ public class Userform extends JFrame {
 		menu_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Transferaccounts tf=new Transferaccounts();
+				Transferaccounts tf=new Transferaccounts(user);
 				tf.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				tf.setModalityType(ModalityType.APPLICATION_MODAL);
 				tf.setVisible(true);
