@@ -1,6 +1,5 @@
 package cn.njxzc.homework;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -11,6 +10,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Vector;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
@@ -26,29 +27,20 @@ public class Adminform extends JFrame {
 	private DefaultTableModel tableModel2;
 	private JTable table;
 	private JTable table_1;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Adminform frame = new Adminform();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public Adminform() {
+		setResizable(false);
 		setTitle("管理员");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 859, 490);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
+		setSize(849, 479);
+		Dimension screensize=Toolkit.getDefaultToolkit().getScreenSize();
+		int height = this.getHeight()/2;
+		int width = this.getWidth()/2;
+		int x = screensize.width/2;
+		int y = screensize.height/2;
+		setLocation(x-width, y-height);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
@@ -128,7 +120,7 @@ public class Adminform extends JFrame {
 				scrollPane_1.setViewportView(table_1);
 			}
 		});
-		button_1.setBounds(740, 10, 93, 23);
+		button_1.setBounds(637, 10, 93, 23);
 		contentPane.add(button_1);
 		
 		JButton button_2 = new JButton("注销信用卡");
@@ -182,5 +174,16 @@ public class Adminform extends JFrame {
 		tableModel2=new DefaultTableModel(tableValue2,tableColumnV);
 		table_1.setModel(tableModel2);
 		scrollPane_1.setViewportView(table_1);
+		
+		JButton btnNewButton = new JButton("返回");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				Login frame = new Login();
+				frame.setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(740, 10, 93, 23);
+		contentPane.add(btnNewButton);
 	}
 }

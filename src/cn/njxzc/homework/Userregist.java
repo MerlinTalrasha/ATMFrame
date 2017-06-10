@@ -17,6 +17,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.util.Vector;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
@@ -30,8 +32,17 @@ public class Userregist extends JDialog {
 	private JPasswordField repasswordField;
 
 	public Userregist() {
+		setResizable(false);
 		setTitle("用户注册");
-		setBounds(100, 100, 366, 373);
+		
+		setSize(366, 373);
+		Dimension screensize=Toolkit.getDefaultToolkit().getScreenSize();
+		int height = this.getHeight()/2;
+		int width = this.getWidth()/2;
+		int x = screensize.width/2;
+		int y = screensize.height/2;
+		setLocation(x-width, y-height);
+		
 		getContentPane().setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("姓名");
@@ -75,50 +86,38 @@ public class Userregist extends JDialog {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String username = null,password=null,repassword=null,personId=null,email=null;
-				if(usernameField.getText().trim().equals("")){
-					JOptionPane.showMessageDialog(null, "请输入用户名！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
+				int accountType = 0;
+				if(usernameField.getText().trim().equals("") || 
+						passwordField.getText().trim().equals("") || 
+						repasswordField.getText().trim().equals("") || 
+						personIdField.getText().trim().equals("") || 
+						emailField.getText().trim().equals("")){
+					JOptionPane.showMessageDialog(null, "请完善用户信息！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
 				}else{
 					username = usernameField.getText().toString();
-				}
-				if(passwordField.getText().trim().equals("")){
-					JOptionPane.showMessageDialog(null, "请输入密码！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
-				}else{
 					password = String.valueOf(passwordField.getPassword());
-				}
-				if(repasswordField.getText().trim().equals("")){
-					JOptionPane.showMessageDialog(null, "请再次输入密码！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
-				}else{
 					repassword = String.valueOf(repasswordField.getPassword());
-				}
-				if(personIdField.getText().trim().equals("")){
-					JOptionPane.showMessageDialog(null, "请输入身份证！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
-				}else{
 					personId = personIdField.getText().toString();
-				}
-				if(emailField.getText().trim().equals("")){
-					JOptionPane.showMessageDialog(null, "请输入身份证！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
-				}else{
 					email = emailField.getText().toString();
-				}
-				int accountType = 0;
-				if (depositButton.isSelected()) {
-					accountType = 0;
-				} else if (creditButton.isSelected()) {
-					accountType = 1;
-				}
-				if (password.equals(repassword)) {
-					JDBC b1 = new JDBC();
-					boolean insert = b1
-							.Change("insert into atm (username,password,personid,email,ceiling,balance,accounttype) values ('"
-									+ username + "','" + password + "','" + personId + "','" + email + "','0','0','"
-									+ accountType + "')");
-					if (insert = true) {
-						JOptionPane.showMessageDialog(null, "注册成功！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
-					} else {
-						JOptionPane.showMessageDialog(null, "注册失败，请检查填写！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
+					if (depositButton.isSelected()) {
+						accountType = 0;
+					} else if (creditButton.isSelected()) {
+						accountType = 1;
 					}
-				} else {
-					JOptionPane.showMessageDialog(null, "两次密码不一致！请重新输入", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
+					if (password.equals(repassword)) {
+						JDBC b1 = new JDBC();
+						boolean insert = b1
+								.Change("insert into atm (username,password,personid,email,ceiling,balance,accounttype) values ('"
+										+ username + "','" + password + "','" + personId + "','" + email + "','0','0','"
+										+ accountType + "')");
+						if (insert = true) {
+							JOptionPane.showMessageDialog(null, "注册成功！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
+						} else {
+							JOptionPane.showMessageDialog(null, "注册失败，请检查填写！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "两次密码不一致！请重新输入", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 			}
 		});

@@ -1,7 +1,9 @@
 package cn.njxzc.homework;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -15,8 +17,18 @@ import java.awt.event.ActionEvent;
 public class Accountinfo extends JDialog {
 	
 	public Accountinfo(Vector user) {
+		setResizable(false);
 		setTitle("账户信息");
-		setBounds(100, 100, 269, 330);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		
+		setSize(269, 330);
+		Dimension screensize=Toolkit.getDefaultToolkit().getScreenSize();
+		int height = this.getHeight()/2;
+		int width = this.getWidth()/2;
+		int x = screensize.width/2;
+		int y = screensize.height/2;
+		setLocation(x-width, y-height);
+
 		getContentPane().setLayout(null);
 		
 		JLabel label = new JLabel("姓名");
@@ -69,7 +81,12 @@ public class Accountinfo extends JDialog {
 		
 		JLabel typeLabel = new JLabel();
 		typeLabel.setBounds(143, 131, 100, 15);
-		typeLabel.setText(info.get(7).toString());
+		int i = Integer.parseInt(info.get(7).toString());
+		if(i==0){
+			typeLabel.setText("储蓄卡");
+		}else if(i==1){
+			typeLabel.setText("信用卡");
+		}
 		getContentPane().add(typeLabel);
 		
 		JLabel ceilinglabel = new JLabel();

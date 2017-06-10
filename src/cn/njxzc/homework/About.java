@@ -1,44 +1,33 @@
 package cn.njxzc.homework;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
+import java.awt.Dimension;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 public class About extends JDialog {
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			About dialog = new About();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public About() {
-		setBounds(100, 100, 338, 303);
+		setResizable(false);
+		setTitle("\u5173\u4E8E");
+		setSize(338, 303);
+		Dimension screensize=Toolkit.getDefaultToolkit().getScreenSize();
+		int height = this.getHeight()/2;
+		int width = this.getWidth()/2;
+		int x = screensize.width/2;
+		int y = screensize.height/2;
+		setLocation(x-width, y-height);
+
 		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("ATM System");
-		lblNewLabel.setFont(new Font("ËÎÌå", Font.BOLD, 28));
-		lblNewLabel.setBounds(82, 66, 216, 69);
+		lblNewLabel.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 28));
+		lblNewLabel.setBounds(75, 79, 216, 69);
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblProjectByTalrasha = new JLabel("Project by TalRasha");
-		lblProjectByTalrasha.setBounds(163, 145, 135, 15);
+		lblProjectByTalrasha.setBounds(162, 158, 135, 15);
 		getContentPane().add(lblProjectByTalrasha);
 	}
 

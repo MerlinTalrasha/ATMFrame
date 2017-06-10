@@ -2,6 +2,7 @@ package cn.njxzc.homework;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 import java.awt.Dialog.ModalityType;
 import java.util.Vector;
 
@@ -18,6 +19,7 @@ import javax.swing.JDialog;
 
 import java.awt.Button;
 import java.awt.Dialog;
+import java.awt.Dimension;
 
 import javax.swing.JMenu;
 
@@ -31,16 +33,25 @@ public class Userform extends JFrame {
 	private JPanel contentPane;
 	
 	public Userform(Vector user) {
+		setResizable(false);
 		setTitle("用户管理");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 575, 370);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
+		setSize(575, 370);
+		Dimension screensize=Toolkit.getDefaultToolkit().getScreenSize();
+		int height = this.getHeight()/2;
+		int width = this.getWidth()/2;
+		int x = screensize.width/2;
+		int y = screensize.height/2;
+		setLocation(x-width, y-height);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 559, 37);
+		menuBar.setBounds(0, 0, 569, 37);
 		contentPane.add(menuBar);
 		
 		JMenu mnNewMenu = new JMenu("账户信息");
@@ -95,7 +106,7 @@ public class Userform extends JFrame {
 		menu_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Setcredit sc=new Setcredit();
+				Setcredit sc=new Setcredit(user);
 				sc.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				sc.setModalityType(ModalityType.APPLICATION_MODAL);
 				sc.setVisible(true);
@@ -120,6 +131,8 @@ public class Userform extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
+				Login frame = new Login();
+				frame.setVisible(true);
 			}
 		});
 		menuBar.add(mnTuic);
