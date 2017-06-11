@@ -8,13 +8,14 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 import java.awt.Dimension;
+import java.awt.TextArea;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
 public class Deposit extends JDialog {
 	private JTextField textField;
 
-	public Deposit(Vector user) {
+	public Deposit(Vector user,Userform f) {
 		setResizable(false);
 		setTitle("存款");
 		setSize(296, 303);
@@ -36,13 +37,13 @@ public class Deposit extends JDialog {
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		String name = user.get(1).toString();
+		String id = user.get(0).toString();
 		JDBC b1 = new JDBC();
 		
 		JButton btnNewButton = new JButton("确认");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Vector deposit = b1.selectOnlyNote("select * from atm where username='"+ name + "'");
+				Vector deposit = b1.selectOnlyNote("select * from atm where id='"+ id + "'");
 				int money = Integer.parseInt(deposit.get(6).toString());
 				int addmoney = 0;
 				int resultmoney = 0;
@@ -53,9 +54,12 @@ public class Deposit extends JDialog {
 					if (isNumeric(c) == true){
 						addmoney = Integer.parseInt(textField.getText().toString());
 						resultmoney = money + addmoney;
-						boolean a = b1.Change("update atm set balance = '"+ resultmoney +"' where username='"+ name +"'");
+						boolean a = b1.Change("update atm set balance = '"+ resultmoney +"' where id='"+ id +"'");
 						if(a==true){
 							JOptionPane.showMessageDialog(null, "存款成功！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
+							String time = f.getTimeLabel();
+							f.setTextArea(time+"\n");
+							
 							textField.setText("");
 						}else{
 							JOptionPane.showMessageDialog(null, "存款失败！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);

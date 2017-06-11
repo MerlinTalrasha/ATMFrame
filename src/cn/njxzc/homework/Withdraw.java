@@ -37,14 +37,14 @@ public class Withdraw extends JDialog {
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		String name = user.get(1).toString();
+		String id = user.get(0).toString();
 		int type = Integer.parseInt(user.get(7).toString());
 		JDBC b1 = new JDBC();
 		
 		JButton btnNewButton = new JButton("确认");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Vector withdraw = b1.selectOnlyNote("select * from atm where username='"+ name + "'");
+				Vector withdraw = b1.selectOnlyNote("select * from atm where id='"+ id + "'");
 				int money = Integer.parseInt(withdraw.get(6).toString());
 				int ceiling = Integer.parseInt(withdraw.get(5).toString());
 				int submoney = 0;
@@ -58,7 +58,7 @@ public class Withdraw extends JDialog {
 						resultmoney = money - submoney;
 						if(type == 0){
 							if(resultmoney >= 0){
-								boolean a = b1.Change("update atm set balance = '"+ resultmoney +"' where username='"+ name +"'");
+								boolean a = b1.Change("update atm set balance = '"+ resultmoney +"' where id='"+ id +"'");
 								if(a == true){
 									JOptionPane.showMessageDialog(null, "取款成功！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
 									textField.setText("");
@@ -72,7 +72,7 @@ public class Withdraw extends JDialog {
 							}
 						}else if(type == 1){
 							if(resultmoney >= -ceiling){
-								boolean a = b1.Change("update atm set balance = '"+ resultmoney +"' where username='"+ name +"'");
+								boolean a = b1.Change("update atm set balance = '"+ resultmoney +"' where id='"+ id +"'");
 								if(a == true){
 									JOptionPane.showMessageDialog(null, "取款成功！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
 									textField.setText("");

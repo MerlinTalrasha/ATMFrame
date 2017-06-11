@@ -33,7 +33,7 @@ public class Login extends JFrame {
 			}
 		});
 	}
-
+	
 	public Login() {
 		setTitle("\u767B\u5F55");
 		setResizable(false);
@@ -53,7 +53,7 @@ public class Login extends JFrame {
 	
 		setContentPane(contentPane);
 		
-		JLabel lblNewLabel = new JLabel("\u7528\u6237\u540D");
+		JLabel lblNewLabel = new JLabel("卡号");
 		lblNewLabel.setBounds(108, 95, 63, 20);
 		contentPane.add(lblNewLabel);
 		
@@ -65,8 +65,8 @@ public class Login extends JFrame {
 			JDBC b1 = new JDBC();
 			Vector user = b1.selectSomeValue("select * from atm");
 			for (int i = 0; i < user.size(); i++) {
-				String username = user.get(i).toString();
-				comboBox.insertItemAt(username, i);
+				String ID = user.get(i).toString();
+				comboBox.insertItemAt(ID, i);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -81,30 +81,39 @@ public class Login extends JFrame {
 		passwordField.setBounds(201, 137, 118, 21);
 		contentPane.add(passwordField);
 		
+		//查询登陆用户
+		JDBC b1 = new JDBC();
+		Vector user = null;
 		JButton loginButton = new JButton("\u767B\u5F55");
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String username = comboBox.getSelectedItem().toString();
+				String ID = comboBox.getSelectedItem().toString();
 				String password=String.valueOf(passwordField.getPassword());
-				if (username.equals("请选择")) {
+				if (ID.equals("请选择")) {
 					JOptionPane.showMessageDialog(null, "请选择登陆用户！", "友情提醒",JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					//查询登陆用户
-					JDBC b1 = new JDBC();
-					//创建一个行向量来接受查询的结果
-					Vector user = b1.selectOnlyNote("select * from atm where username='"+ username + "'");
-					//user这个行向量中已经有了一条用户名为"用户输入的"的纪录
-					//把行向量中的密码取出来,0代表第一个字段
-					String password1 = user.get(2).toString();
-					//比较密码是否正确
-					if (password.equals(password1)) {
-						//正确的话，就登录成功；并且传递了行向量user到Userform窗体
-						Userform frame = new Userform(user);
-						frame.setVisible(true);
-						setVisible(false);
-					} else {
-						JOptionPane.showMessageDialog(null, "用户名密码错误", "友情提醒",JOptionPane.INFORMATION_MESSAGE);
-						passwordField.setText("      ");//清空密码框,默认是6个空格	
+					if(ID.equals("")||password.equals("")){
+						JOptionPane.showMessageDialog(null, "用户名密码错误！", "友情提醒",JOptionPane.INFORMATION_MESSAGE);
+					}else{
+						//创建一个行向量来接受查询的结果
+						Vector user = b1.selectOnlyNote("select * from atm where id='"+ ID + "'");
+						if(user==null){
+							JOptionPane.showMessageDialog(null, "用户名密码错误！", "友情提醒",JOptionPane.INFORMATION_MESSAGE);
+						}else{
+							//user这个行向量中已经有了一条用户名为"用户输入的"的纪录
+							//把行向量中的密码取出来,0代表第一个字段
+							String password1 = user.get(2).toString();
+							//比较密码是否正确
+							if (password.equals(password1)) {
+								//正确的话，就登录成功；并且传递了行向量user到Userform窗体
+								Userform frame = new Userform(user);
+								frame.setVisible(true);
+								setVisible(false);
+							} else {
+								JOptionPane.showMessageDialog(null, "用户名密码错误！", "友情提醒",JOptionPane.INFORMATION_MESSAGE);
+								passwordField.setText("");//清空密码框
+							}
+						}
 					}
 				}
 			}

@@ -109,7 +109,7 @@ public class JDBC {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                vector.add(rs.getObject(2));
+                vector.add(rs.getObject(1));
             }
             rs.close();
             stmt.close();

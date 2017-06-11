@@ -60,9 +60,9 @@ public class Accountinfo extends JDialog {
 		button.setBounds(81, 217, 93, 23);
 		getContentPane().add(button);
 		
-		String name = user.get(1).toString();
+		String id = user.get(0).toString();
 		JDBC b1 = new JDBC();
-		Vector info = b1.selectOnlyNote("select * from atm where username='"+ name + "'");
+		Vector info = b1.selectOnlyNote("select * from atm where id='"+ id + "'");
 		
 		JLabel nameLabel = new JLabel();
 		nameLabel.setBounds(143, 56, 100, 15);
@@ -93,5 +93,14 @@ public class Accountinfo extends JDialog {
 		ceilinglabel.setBounds(143, 156, 100, 15);
 		ceilinglabel.setText(info.get(5).toString());
 		getContentPane().add(ceilinglabel);
+		
+		JLabel label_5 = new JLabel("卡号");
+		label_5.setBounds(60, 31, 54, 15);
+		getContentPane().add(label_5);
+		
+		JLabel idLabel = new JLabel();
+		idLabel.setBounds(143, 31, 54, 15);
+		idLabel.setText(info.get(0).toString());
+		getContentPane().add(idLabel);
 	}
 }

@@ -73,15 +73,15 @@ public class Adminform extends JFrame {
 					JOptionPane.showMessageDialog(null, "请选择要删除的用户！", "友情提示", JOptionPane.INFORMATION_MESSAGE);
 				}else{
 					//把此行中的姓名这列赋值给变量
-			        String name = table.getValueAt(selectedRow, 1).toString();
+			        String id = table.getValueAt(selectedRow, 0).toString();
 			        //确认提示框，问你是否要删除，当点击"是"，返回i=0
-			        int i = JOptionPane.showConfirmDialog(null, "确定要删除用户“" + name + "”?", "友情提示", JOptionPane.YES_NO_OPTION);
+			        int i = JOptionPane.showConfirmDialog(null, "确定要删除用户“" + id + "”?", "友情提示", JOptionPane.YES_NO_OPTION);
 			        if (i == 0) {
 			        	//表格模型中先删除这一行
 			            tableModel1.removeRow(selectedRow);
 			            //对数据库进行操作
 			            JDBC b1=new JDBC();
-			            boolean pd= b1.Change("delete from atm where username='"+ name +"'");
+			            boolean pd= b1.Change("delete from atm where id='"+ id +"'");
 			            if (pd==true){
 			            	JOptionPane.showMessageDialog(null, "删除用户成功！", "友情提", JOptionPane.INFORMATION_MESSAGE);
 			            }
@@ -132,15 +132,15 @@ public class Adminform extends JFrame {
 					JOptionPane.showMessageDialog(null, "请选择要删除的用户！", "友情提示", JOptionPane.INFORMATION_MESSAGE);
 				}else{
 					//把此行中的姓名这列赋值给变量
-			        String name = table_1.getValueAt(selectedRow, 1).toString();
+			        String id = table_1.getValueAt(selectedRow, 0).toString();
 			        //确认提示框，问你是否要删除，当点击"是"，返回i=0
-			        int i = JOptionPane.showConfirmDialog(null, "确定要删除用户“" + name + "”?", "友情提示", JOptionPane.YES_NO_OPTION);
+			        int i = JOptionPane.showConfirmDialog(null, "确定要删除用户“" + id + "”?", "友情提示", JOptionPane.YES_NO_OPTION);
 			        if (i == 0) {
 			        	//表格模型中先删除这一行
 			            tableModel2.removeRow(selectedRow);
 			            //对数据库进行操作
 			            JDBC b1=new JDBC();
-			            boolean pd= b1.Change("delete from atm where username='"+ name +"'");
+			            boolean pd= b1.Change("delete from atm where id='"+ id +"'");
 			            if (pd==true){
 			            	JOptionPane.showMessageDialog(null, "删除用户成功！", "友情提", JOptionPane.INFORMATION_MESSAGE);
 			            }

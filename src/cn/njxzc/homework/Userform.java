@@ -1,36 +1,29 @@
 package cn.njxzc.homework;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.Dialog.ModalityType;
+import java.util.Date;
 import java.util.Vector;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import javafx.stage.Modality;
-
-import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
-import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JDialog;
-
-import java.awt.Button;
-import java.awt.Dialog;
 import java.awt.Dimension;
-
 import javax.swing.JMenu;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 public class Userform extends JFrame {
 
 	private JPanel contentPane;
+	private static JTextArea textArea;
+	private static JLabel timeLabel;
 	
 	public Userform(Vector user) {
 		setResizable(false);
@@ -66,11 +59,12 @@ public class Userform extends JFrame {
 		});
 		menuBar.add(mnNewMenu);
 		
+		Userform u1 = this;
 		JMenu menu = new JMenu("存款");
 		menu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Deposit dp=new Deposit(user);
+				Deposit dp=new Deposit(user,u1);
 				dp.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dp.setModalityType(ModalityType.APPLICATION_MODAL);
 				dp.setVisible(true);
@@ -102,14 +96,21 @@ public class Userform extends JFrame {
 		});
 		menuBar.add(menu_2);
 		
+		JDBC b1 = new JDBC();
+		int type = Integer.parseInt(user.get(7).toString());
+		
 		JMenu menu_3 = new JMenu("设置信用额度");
 		menu_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Setcredit sc=new Setcredit(user);
-				sc.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				sc.setModalityType(ModalityType.APPLICATION_MODAL);
-				sc.setVisible(true);
+				if(type == 0){
+					JOptionPane.showMessageDialog(null, "该账户不是信用卡用户！", "友情提醒",JOptionPane.INFORMATION_MESSAGE);
+				}else if(type == 1){
+					Setcredit sc=new Setcredit(user);
+					sc.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					sc.setModalityType(ModalityType.APPLICATION_MODAL);
+					sc.setVisible(true);
+				}
 			}
 		});
 		menuBar.add(menu_3);
@@ -136,5 +137,36 @@ public class Userform extends JFrame {
 			}
 		});
 		menuBar.add(mnTuic);
+		
+		timeLabel = new JLabel("New label");
+		timeLabel.setBounds(413, 316, 146, 15);
+		contentPane.add(timeLabel);
+		
+		textArea = new JTextArea();
+		textArea.setBounds(0, 38, 569, 268);
+		contentPane.add(textArea);
+		
+		class Time extends Thread {// 创建内部类
+			public void run() {// 重构父类的方法
+				while (true) {
+					DateFormat df = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");// 创建日期对象,并格式化显示格式
+					timeLabel.setText(df.format(new Date()));// 获取当前时间，并显示到时间标签中
+					try {
+						Thread.sleep(1000);// 令线程休眠1秒
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		Time t = new Time();
+		t.start();
+	}
+	public void setTextArea(String txt){
+		textArea.append(txt);
+	}
+	
+	public String getTimeLabel(){
+		return timeLabel.getText();
 	}
 }

@@ -41,7 +41,7 @@ public class Setcredit extends JDialog {
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		String name = user.get(1).toString();
+		String id = user.get(0).toString();
 		JDBC b1 = new JDBC();
 		
 		JButton button = new JButton("确认");
@@ -54,7 +54,7 @@ public class Setcredit extends JDialog {
 					if (isNumeric(c) == true){
 						int ceiling = Integer.parseInt(textField.getText().toString());
 						if(ceiling % 100 == 0){
-							boolean a = b1.Change("update atm set ceiling = '"+ ceiling +"' where username='"+ name +"'");
+							boolean a = b1.Change("update atm set ceiling = '"+ ceiling +"' where id='"+ id +"'");
 							if(a=true){
 								JOptionPane.showMessageDialog(null, "设置成功！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
 								textField.setText("");

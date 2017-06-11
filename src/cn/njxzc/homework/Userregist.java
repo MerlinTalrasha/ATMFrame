@@ -3,13 +3,6 @@ package cn.njxzc.homework;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import com.sun.javafx.scene.layout.region.Margins.Converter;
-
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.RadioButton;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ButtonGroup;
@@ -111,10 +104,12 @@ public class Userregist extends JDialog {
 										+ username + "','" + password + "','" + personId + "','" + email + "','0','0','"
 										+ accountType + "')");
 						if (insert = true) {
-							JOptionPane.showMessageDialog(null, "注册成功！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
+							Vector ID = b1.selectOnlyNote("select last_insert_id()");
+							String id = ID.get(0).toString();
+							JOptionPane.showMessageDialog(null, "注册成功！您的卡号为："+id, "友情提醒", JOptionPane.INFORMATION_MESSAGE);
 						} else {
 							JOptionPane.showMessageDialog(null, "注册失败，请检查填写！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
-						}
+						}	
 					} else {
 						JOptionPane.showMessageDialog(null, "两次密码不一致！请重新输入", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
 					}

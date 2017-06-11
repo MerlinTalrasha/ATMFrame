@@ -30,7 +30,7 @@ public class Transferaccounts extends JDialog {
 
 		getContentPane().setLayout(null);
 		
-		JLabel label = new JLabel("请输入收款人账户");
+		JLabel label = new JLabel("请输入收款人卡号");
 		label.setBounds(10, 88, 114, 15);
 		getContentPane().add(label);
 		
@@ -48,29 +48,30 @@ public class Transferaccounts extends JDialog {
 		textField_1.setBounds(134, 120, 119, 21);
 		getContentPane().add(textField_1);
 		
-		String name = user.get(1).toString();
+		String id = user.get(0).toString();
 		JDBC b1 = new JDBC();
 		
 		JButton button = new JButton("确认");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String rd = String.valueOf((int)((1000+Math.random()*9000)/1));
-				Vector transferX = b1.selectOnlyNote("select * from atm where username='"+ name + "'");
+				Vector transferX = b1.selectOnlyNote("select * from atm where id='"+ id + "'");
 				int moneyX = Integer.parseInt(transferX.get(6).toString());
 				if(textField.getText().trim().equals("") || textField_1.getText().trim().equals("")){
 					JOptionPane.showMessageDialog(null, "请填写详细信息！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
 				}else{
 					String c = textField_1.getText().toString();
 					if (isNumeric(c) == true){
-						String tname = textField.getText().toString();
+						int tid = Integer.parseInt(textField.getText().toString());
 						int moneyY = 0;
 						try {
-							Vector transferY = b1.selectOnlyNote("select * from atm where username='"+ tname + "'");
+							Vector transferY = b1.selectOnlyNote("select * from atm where id='"+ tid + "'");
 							moneyY = Integer.parseInt(transferY.get(6).toString());
 						} catch (Exception e2) {
 							JOptionPane.showMessageDialog(null, "账户不存在，转账失败！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
 							textField.setText("");
 							textField_1.setText("");
+							return;
 						} 
 						int transfermoney = Integer.parseInt(textField_1.getText().toString());
 						String a = JOptionPane.showInputDialog(null,rd,"验证码",JOptionPane.OK_CANCEL_OPTION);
@@ -90,8 +91,8 @@ public class Transferaccounts extends JDialog {
 									textField.setText("");
 									textField_1.setText("");
 								}else{
-									b1.Change("update atm set balance = '"+ moneyR +"' where username='"+ name +"'");
-									boolean r = b1.Change("update atm set balance = '"+ addmoney +"' where username='"+ tname +"'");
+									b1.Change("update atm set balance = '"+ moneyR +"' where id='"+ id +"'");
+									boolean r = b1.Change("update atm set balance = '"+ addmoney +"' where id='"+ tid +"'");
 									if(r = true){
 										JOptionPane.showMessageDialog(null, "转账成功！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
 										textField.setText("");
