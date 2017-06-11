@@ -17,7 +17,7 @@ public class Transferaccounts extends JDialog {
 	private JTextField textField;
 	private JTextField textField_1;
 
-	public Transferaccounts(Vector user) {
+	public Transferaccounts(Vector user,Userform f) {
 		setResizable(false);
 		setTitle("转账");
 		setSize(278, 318);
@@ -50,6 +50,7 @@ public class Transferaccounts extends JDialog {
 		
 		String id = user.get(0).toString();
 		JDBC b1 = new JDBC();
+		String username =user.get(1).toString();
 		
 		JButton button = new JButton("确认");
 		button.addActionListener(new ActionListener() {
@@ -64,8 +65,9 @@ public class Transferaccounts extends JDialog {
 					if (isNumeric(c) == true){
 						int tid = Integer.parseInt(textField.getText().toString());
 						int moneyY = 0;
+						Vector transferY;
 						try {
-							Vector transferY = b1.selectOnlyNote("select * from atm where id='"+ tid + "'");
+							transferY = b1.selectOnlyNote("select * from atm where id='"+ tid + "'");
 							moneyY = Integer.parseInt(transferY.get(6).toString());
 						} catch (Exception e2) {
 							JOptionPane.showMessageDialog(null, "账户不存在，转账失败！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
@@ -95,6 +97,13 @@ public class Transferaccounts extends JDialog {
 									boolean r = b1.Change("update atm set balance = '"+ addmoney +"' where id='"+ tid +"'");
 									if(r = true){
 										JOptionPane.showMessageDialog(null, "转账成功！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
+										String time = f.getTimeLabel();
+										f.setTextArea(time+"\n");
+										String tname = transferY.get(1).toString();
+										String tcard = transferY.get(0).toString();
+										f.setTextArea("卡号："+id+" "+"用户名："+username+" "+"转账："+transfermoney+"元"+"\n"+"收款人："+tname+" "+"收款人卡号："+tcard+"\n");
+										b1.Change("insert into record (card,username,operate,money,username2,date) values ('"
+													+id+"','"+username+"','转账','"+transfermoney+"','"+tname+"','"+time+"')");
 										textField.setText("");
 										textField_1.setText("");
 									}else{

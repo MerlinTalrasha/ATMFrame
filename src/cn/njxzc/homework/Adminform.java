@@ -54,15 +54,11 @@ public class Adminform extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		splitPane.setLeftComponent(scrollPane);
-		
 		table = new JTable();
-		scrollPane.setViewportView(table);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		splitPane.setRightComponent(scrollPane_1);
-		
 		table_1 = new JTable();
-		scrollPane_1.setViewportView(table_1);
 		
 		button = new JButton("注销储蓄卡");
 		button.addActionListener(new ActionListener() {
@@ -96,7 +92,7 @@ public class Adminform extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tableColumnV=new Vector<String>();
-				tableColumnV.add("ID");
+				tableColumnV.add("卡号");
 				tableColumnV.add("姓名");
 				tableColumnV.add("密码");
 				tableColumnV.add("身份证");
@@ -152,7 +148,7 @@ public class Adminform extends JFrame {
 		contentPane.add(button_2);
 		
 		tableColumnV=new Vector<String>();
-		tableColumnV.add("ID");
+		tableColumnV.add("卡号");
 		tableColumnV.add("姓名");
 		tableColumnV.add("密码");
 		tableColumnV.add("身份证");
@@ -185,5 +181,15 @@ public class Adminform extends JFrame {
 		});
 		btnNewButton.setBounds(740, 10, 93, 23);
 		contentPane.add(btnNewButton);
+		
+		JButton button_3 = new JButton("用户操作记录");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Userrecord ur = new Userrecord();
+				ur.setVisible(true);
+			}
+		});
+		button_3.setBounds(510, 10, 117, 23);
+		contentPane.add(button_3);
 	}
 }

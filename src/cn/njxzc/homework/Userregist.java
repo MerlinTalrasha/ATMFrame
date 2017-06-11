@@ -107,6 +107,7 @@ public class Userregist extends JDialog {
 							Vector ID = b1.selectOnlyNote("select last_insert_id()");
 							String id = ID.get(0).toString();
 							JOptionPane.showMessageDialog(null, "注册成功！您的卡号为："+id, "友情提醒", JOptionPane.INFORMATION_MESSAGE);
+							dispose();
 						} else {
 							JOptionPane.showMessageDialog(null, "注册失败，请检查填写！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
 						}	

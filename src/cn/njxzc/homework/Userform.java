@@ -18,12 +18,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class Userform extends JFrame {
 
 	private JPanel contentPane;
-	private static JTextArea textArea;
 	private static JLabel timeLabel;
+	private static JTextArea textArea;
 	
 	public Userform(Vector user) {
 		setResizable(false);
@@ -76,7 +77,7 @@ public class Userform extends JFrame {
 		menu_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Withdraw wd=new Withdraw(user);
+				Withdraw wd=new Withdraw(user,u1);
 				wd.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				wd.setModalityType(ModalityType.APPLICATION_MODAL);
 				wd.setVisible(true);
@@ -88,7 +89,7 @@ public class Userform extends JFrame {
 		menu_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Transferaccounts tf=new Transferaccounts(user);
+				Transferaccounts tf=new Transferaccounts(user,u1);
 				tf.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				tf.setModalityType(ModalityType.APPLICATION_MODAL);
 				tf.setVisible(true);
@@ -142,9 +143,12 @@ public class Userform extends JFrame {
 		timeLabel.setBounds(413, 316, 146, 15);
 		contentPane.add(timeLabel);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 38, 569, 268);
+		contentPane.add(scrollPane);
+		
 		textArea = new JTextArea();
-		textArea.setBounds(0, 38, 569, 268);
-		contentPane.add(textArea);
+		scrollPane.setViewportView(textArea);
 		
 		class Time extends Thread {// 创建内部类
 			public void run() {// 重构父类的方法

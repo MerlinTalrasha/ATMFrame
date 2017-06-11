@@ -6,6 +6,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 import java.awt.Dimension;
 import java.awt.TextArea;
@@ -38,6 +41,7 @@ public class Deposit extends JDialog {
 		textField.setColumns(10);
 		
 		String id = user.get(0).toString();
+		String username = user.get(1).toString();
 		JDBC b1 = new JDBC();
 		
 		JButton btnNewButton = new JButton("确认");
@@ -59,7 +63,9 @@ public class Deposit extends JDialog {
 							JOptionPane.showMessageDialog(null, "存款成功！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
 							String time = f.getTimeLabel();
 							f.setTextArea(time+"\n");
-							
+							f.setTextArea("卡号："+id+" "+"用户名："+username+" "+"存款："+addmoney+"元"+"\n");
+							b1.Change("insert into record (card,username,operate,money,date) values ('"
+										+id+"','"+username+"','存款','"+addmoney+"','"+time+"')");
 							textField.setText("");
 						}else{
 							JOptionPane.showMessageDialog(null, "存款失败！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);

@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 public class Withdraw extends JDialog {
 	private JTextField textField;
 
-	public Withdraw(Vector user) {
+	public Withdraw(Vector user,Userform f) {
 		setResizable(false);
 		setTitle("取款");
 		
@@ -39,6 +39,7 @@ public class Withdraw extends JDialog {
 		
 		String id = user.get(0).toString();
 		int type = Integer.parseInt(user.get(7).toString());
+		String username = user.get(1).toString();
 		JDBC b1 = new JDBC();
 		
 		JButton btnNewButton = new JButton("确认");
@@ -75,6 +76,11 @@ public class Withdraw extends JDialog {
 								boolean a = b1.Change("update atm set balance = '"+ resultmoney +"' where id='"+ id +"'");
 								if(a == true){
 									JOptionPane.showMessageDialog(null, "取款成功！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
+									String time = f.getTimeLabel();
+									f.setTextArea(time+"\n");
+									f.setTextArea("卡号："+id+" "+"用户名："+username+" "+"取款："+submoney+"元"+"\n");
+									b1.Change("insert into record (card,username,operate,money,date) values ('"
+												+id+"','"+username+"','取款','"+submoney+"','"+time+"')");
 									textField.setText("");
 								}else{
 									JOptionPane.showMessageDialog(null, "取款失败！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);

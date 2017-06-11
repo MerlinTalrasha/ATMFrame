@@ -100,6 +100,30 @@ public class JDBC {
         return vector;//返回结果集向量
     }
     
+    //查询多个记录(去除ID列)
+    public Vector rselectSomeNote(String sql) {
+        Vector<Vector> vector = new Vector<Vector>();// 创建结果集向量
+        Connection conn = JDBC.getConnection();// 获得数据库连接
+        try {
+            Statement stmt = conn.createStatement();// 创建连接状态对象
+            ResultSet rs = stmt.executeQuery(sql);// 执行SQL语句获得查询结果
+            int columnCount = rs.getMetaData().getColumnCount();//获得查询数据表的列数
+            //rs记录集中有多少个字段
+            while (rs.next()) {//遍历结果集
+                Vector<Object> rowV = new Vector<Object>();//创建行向量
+                for (int column = 2; column <= columnCount; column++) {
+                    rowV.add(rs.getObject(column));//添加列值
+                }
+                vector.add(rowV);//将行向量添加到结果集向量中
+            }
+            rs.close();//关闭结果集对象
+            stmt.close();//关闭连接状态对象
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vector;//返回结果集向量
+    }
+    
     // 查询多个值
     protected Vector selectSomeValue(String sql) {
         Vector<Object> vector = new Vector<Object>();
