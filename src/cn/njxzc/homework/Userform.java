@@ -289,10 +289,9 @@ public class Userform extends JFrame {
 		Robot r = null;//创建自动化工具对象
 		try {
 			r = new Robot();
-			r.keyPress(KeyEvent.VK_ALT);//按下左Contrl  keycode为17  
-		    r.keyRelease(KeyEvent.VK_ALT);//释放左Control键  
+			r.keyPress(KeyEvent.VK_ALT);
+		    r.keyRelease(KeyEvent.VK_ALT);
 		} catch (AWTException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}  
 	}
