@@ -6,9 +6,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.Vector;
+import java.awt.AWTEvent;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.AWTEventListener;
 import java.awt.event.ActionEvent;
 
 public class Transferaccounts extends JDialog {
@@ -16,6 +19,18 @@ public class Transferaccounts extends JDialog {
 	private JTextField textField_1;
 
 	public Transferaccounts(Vector user,Userform f) {
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+        toolkit.addAWTEventListener(new AWTEventListener(){
+                @Override 
+                public void eventDispatched(AWTEvent e){
+                    if (e.getID() == KeyEvent.KEY_PRESSED) {
+                        KeyEvent evt = (KeyEvent) e;
+                        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                            dispose();
+                        }
+                    }
+                }
+        	},AWTEvent.KEY_EVENT_MASK);
 		setResizable(false);
 		setTitle("转账");
 		setSize(278, 318);

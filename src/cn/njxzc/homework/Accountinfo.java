@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Accountinfo extends JDialog {
 	
@@ -47,6 +49,12 @@ public class Accountinfo extends JDialog {
 		getContentPane().add(label_4);
 		
 		JButton button = new JButton("确认");
+		button.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				dispose();
+			}
+		});
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();

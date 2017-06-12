@@ -12,7 +12,7 @@ public class JDBC {
 	//?useUnicode=true&characterEncoding=UTF-8
     private static final String URL = "jdbc:mysql://localhost/mysql";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "";
     
     //线程对象 <具体的线程>
     private static final ThreadLocal<Connection> threadLocal = new ThreadLocal<Connection>();

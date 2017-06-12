@@ -1,14 +1,29 @@
 package cn.njxzc.homework;
 
+import java.awt.AWTEvent;
 import java.awt.Dimension;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.AWTEventListener;
+import java.awt.event.KeyEvent;
 
 public class About extends JDialog {
 
 	public About() {
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+        toolkit.addAWTEventListener(new AWTEventListener(){
+                @Override 
+                public void eventDispatched(AWTEvent e){
+                    if (e.getID() == KeyEvent.KEY_PRESSED) {
+                        KeyEvent evt = (KeyEvent) e;
+                        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                            dispose();
+                        }
+                    }
+                }
+        	},AWTEvent.KEY_EVENT_MASK);
 		setResizable(false);
 		setTitle("\u5173\u4E8E");
 		setSize(338, 303);

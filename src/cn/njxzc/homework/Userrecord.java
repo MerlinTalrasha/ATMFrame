@@ -83,7 +83,7 @@ public class Userrecord extends JFrame {
 				scrollPane.setViewportView(table);
 			}
 		});
-		btnNewButton.setBounds(338, 10, 93, 23);
+		btnNewButton.setBounds(362, 10, 93, 23);
 		contentPane.add(btnNewButton);
 		
 		button = new JButton("关闭");
@@ -92,7 +92,7 @@ public class Userrecord extends JFrame {
 				dispose();
 			}
 		});
-		button.setBounds(441, 10, 93, 23);
+		button.setBounds(465, 10, 93, 23);
 		contentPane.add(button);
 		
 		tableColumnV=new Vector<String>();

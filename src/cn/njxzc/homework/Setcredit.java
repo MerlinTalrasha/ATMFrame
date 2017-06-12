@@ -1,5 +1,6 @@
 package cn.njxzc.homework;
 
+import java.awt.AWTEvent;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JButton;
@@ -8,13 +9,27 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.Vector;
+import java.awt.event.AWTEventListener;
 import java.awt.event.ActionEvent;
 
 public class Setcredit extends JDialog {
 	private JTextField textField;
 
 	public Setcredit(Vector user) {
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+        toolkit.addAWTEventListener(new AWTEventListener(){
+                @Override 
+                public void eventDispatched(AWTEvent e){
+                    if (e.getID() == KeyEvent.KEY_PRESSED) {
+                        KeyEvent evt = (KeyEvent) e;
+                        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                            dispose();
+                        }
+                    }
+                }
+        	},AWTEvent.KEY_EVENT_MASK);
 		setResizable(false);
 		setTitle("设置信用额度");
 		setSize(296, 303);
