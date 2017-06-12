@@ -2,12 +2,10 @@ package cn.njxzc.homework;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
-import java.util.Random;
 import java.util.Vector;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -48,7 +46,7 @@ public class Transferaccounts extends JDialog {
 		textField_1.setBounds(134, 120, 119, 21);
 		getContentPane().add(textField_1);
 		
-		String id = user.get(0).toString();
+		int id = Integer.parseInt(user.get(0).toString());
 		JDBC b1 = new JDBC();
 		String username =user.get(1).toString();
 		
@@ -73,6 +71,10 @@ public class Transferaccounts extends JDialog {
 							JOptionPane.showMessageDialog(null, "账户不存在，转账失败！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
 							textField.setText("");
 							textField_1.setText("");
+							return;
+						} 
+						if(tid == id){
+							JOptionPane.showMessageDialog(null, "无法转账给自己！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
 							return;
 						} 
 						int transfermoney = Integer.parseInt(textField_1.getText().toString());
@@ -102,8 +104,8 @@ public class Transferaccounts extends JDialog {
 										String tname = transferY.get(1).toString();
 										String tcard = transferY.get(0).toString();
 										f.setTextArea("卡号："+id+" "+"用户名："+username+" "+"转账："+transfermoney+"元"+"\n"+"收款人："+tname+" "+"收款人卡号："+tcard+"\n");
-										b1.Change("insert into record (card,username,operate,money,username2,date) values ('"
-													+id+"','"+username+"','转账','"+transfermoney+"','"+tname+"','"+time+"')");
+										b1.Change("insert into record (card,username,operate,money,username2,card2,date) values ('"
+													+id+"','"+username+"','转账','"+transfermoney+"','"+tname+"','"+tcard+"','"+time+"')");
 										textField.setText("");
 										textField_1.setText("");
 									}else{
@@ -143,5 +145,4 @@ public class Transferaccounts extends JDialog {
 		button_1.setBounds(146, 189, 93, 23);
 		getContentPane().add(button_1);
 	}
-
 }

@@ -1,14 +1,9 @@
 package cn.njxzc.homework;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -94,5 +89,4 @@ public class Setcredit extends JDialog {
 		button_1.setBounds(157, 169, 93, 23);
 		getContentPane().add(button_1);
 	}
-
 }
