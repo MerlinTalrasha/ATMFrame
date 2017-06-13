@@ -95,7 +95,7 @@ public class Login extends JFrame {
 					if(ID.equals("")||password.equals("")){
 						JOptionPane.showMessageDialog(null, "用户名密码错误！", "友情提醒",JOptionPane.INFORMATION_MESSAGE);
 					}else{
-						//创建一个行向量来接受查询的结果
+						//创建一个行向量来接收查询的结果
 						Vector user = b1.selectOnlyNote("select * from atm where id='"+ ID + "'");
 						if(user==null){
 							JOptionPane.showMessageDialog(null, "用户名密码错误！", "友情提醒",JOptionPane.INFORMATION_MESSAGE);
@@ -105,7 +105,7 @@ public class Login extends JFrame {
 							String password1 = user.get(2).toString();
 							//比较密码是否正确
 							if (password.equals(password1)) {
-								//正确的话，就登录成功；并且传递了行向量user到Userform窗体
+								//登录成功，传递行向量user到Userform窗体
 								Userform frame = new Userform(user);
 								frame.setVisible(true);
 								setVisible(false);

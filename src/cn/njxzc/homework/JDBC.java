@@ -53,8 +53,8 @@ public class JDBC {
         return isClosed;
     }
     
-    //插入、修改、删除记录
-    public boolean Change(String sql) {
+    
+    public boolean Change(String sql) {				//插入、修改、删除记录
     	//持久化将对象与数据库表对应，将内存中数据持久化至数据库中保存
         boolean Change = true;	//默认持久化成功
         Connection conn = JDBC.getConnection();//获得数据库连接
@@ -76,8 +76,7 @@ public class JDBC {
         return Change;//返回持久化结果
     }
     
-    //查询多个记录
-    public Vector selectSomeNote(String sql) {
+    public Vector selectSomeNote(String sql) {			//查询多个记录
         Vector<Vector> vector = new Vector<Vector>();// 创建结果集向量
         Connection conn = JDBC.getConnection();// 获得数据库连接
         try {

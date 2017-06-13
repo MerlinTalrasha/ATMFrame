@@ -68,7 +68,6 @@ public class Transferaccounts extends JDialog {
 		JButton button = new JButton("确认");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String rd = String.valueOf((int)((1000+Math.random()*9000)/1));
 				Vector transferX = b1.selectOnlyNote("select * from atm where id='"+ id + "'");
 				int moneyX = Integer.parseInt(transferX.get(6).toString());
 				if(textField.getText().trim().equals("") || textField_1.getText().trim().equals("")){
@@ -93,11 +92,12 @@ public class Transferaccounts extends JDialog {
 							return;
 						} 
 						int transfermoney = Integer.parseInt(textField_1.getText().toString());
-						String a = JOptionPane.showInputDialog(null,rd,"验证码",JOptionPane.OK_CANCEL_OPTION);
-						if(a == null){
+						String rd = String.valueOf((int)((1000+Math.random()*9000)/1));				//随机一个4位数字，添加到input提示框中
+						String a = JOptionPane.showInputDialog(null,rd,"验证码",JOptionPane.OK_CANCEL_OPTION);//接收用户输入的验证码
+						if(a == null){			//如果用户点取消，返回值为空，空则跳出
 							return;
 						}
-						if(a.trim().equals("")){
+						if(a.trim().equals("")){			//如果用户不输入或者输入错误，则提示验证码错误
 							JOptionPane.showMessageDialog(null, "验证码错误！", "友情提醒", JOptionPane.INFORMATION_MESSAGE);
 						}else{
 							int x = Integer.parseInt(rd);

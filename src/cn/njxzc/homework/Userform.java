@@ -53,7 +53,7 @@ public class Userform extends JFrame {
 		menuBar.setBounds(0, 0, 569, 37);
 		contentPane.add(menuBar);
 		
-		Userform u1 = this;
+		Userform u1 = this;			//创建u1对象，将当前窗体所有参数放进去
 		JMenu mnNewMenu = new JMenu("账户信息(I)");
 		mnNewMenu.addMenuListener(new MenuListener() {
 			public void menuCanceled(MenuEvent e) {
@@ -154,7 +154,7 @@ public class Userform extends JFrame {
 		menu_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Transferaccounts tf=new Transferaccounts(user,u1);
+				Transferaccounts tf=new Transferaccounts(user,u1);		//在生成子窗体的时候，将u1带入
 				tf.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				tf.setModalityType(ModalityType.APPLICATION_MODAL);
 				tf.setVisible(true);

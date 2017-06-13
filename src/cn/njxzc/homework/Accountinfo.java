@@ -63,7 +63,7 @@ public class Accountinfo extends JDialog {
 		button.setBounds(81, 217, 93, 23);
 		getContentPane().add(button);
 		
-		String id = user.get(0).toString();
+		String id = user.get(0).toString();			//获取传递来的向量中的index值，转为String或者其他类型
 		JDBC b1 = new JDBC();
 		Vector info = b1.selectOnlyNote("select * from atm where id='"+ id + "'");
 		

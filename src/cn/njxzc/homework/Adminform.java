@@ -147,7 +147,7 @@ public class Adminform extends JFrame {
 		button_2.setBounds(130, 10, 110, 23);
 		contentPane.add(button_2);
 		
-		tableColumnV=new Vector<String>();
+		tableColumnV=new Vector<String>();				//添加表头
 		tableColumnV.add("卡号");
 		tableColumnV.add("姓名");
 		tableColumnV.add("密码");
@@ -158,13 +158,13 @@ public class Adminform extends JFrame {
 		tableColumnV.add("账户类型");
 		
 		JDBC b1=new JDBC();
-		tableValue1=new Vector<Vector>();
+		tableValue1=new Vector<Vector>();				//实例化向量
 		tableValue2=new Vector<Vector>();
-		tableValue1=b1.selectSomeNote("select * from atm where accounttype='0'");
+		tableValue1=b1.selectSomeNote("select * from atm where accounttype='0'");//将SQL语句查询出的结果放入向量集中
 		tableValue2=b1.selectSomeNote("select * from atm where accounttype='1'");
 		
-		tableModel1=new DefaultTableModel(tableValue1,tableColumnV);
-		table.setModel(tableModel1);
+		tableModel1=new DefaultTableModel(tableValue1,tableColumnV);			//将表头和结果向量集添加到表格模型中
+		table.setModel(tableModel1);											//最后将表格模型赋给JTable
 		scrollPane.setViewportView(table);
 		
 		tableModel2=new DefaultTableModel(tableValue2,tableColumnV);
